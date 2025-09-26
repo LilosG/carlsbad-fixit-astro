@@ -3,7 +3,6 @@ import "../styles/tailwind.css"
 import Header from "../components/Header.astro"
 import Footer from "../components/Footer.astro"
 import SeoHead from "../components/SeoHead.astro"
-import JsonLd from "../components/JsonLd.astro"
 
 const { page = {} } = Astro.props
 const site = {
@@ -20,10 +19,11 @@ const canonical = page.canonical ?? (Astro.url ? Astro.url.href : "/")
 <html lang="en">
   <head>
     <SeoHead title={title} description={description} canonical={canonical} />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
-  <body class="min-h-screen flex flex-col antialiased">
-    <Header />
-    <main class="flex-1">
+  <body class="min-h-screen bg-white text-gray-900 antialiased">
+    <Header site={site} />
+    <main class="min-h-[60vh]">
       <slot />
     </main>
     <Footer site={site} />

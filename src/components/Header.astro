@@ -1,14 +1,14 @@
 ---
+const { site } = Astro.props
 ---
-<header class="border-b bg-white/80 backdrop-blur">
-  <div class="mx-auto max-w-7xl px-4 py-4 flex items-center justify-between">
-    <a href="/" class="text-xl font-semibold">San Diego HandyMan Pros</a>
-    <nav class="hidden md:block">
-      <ul class="flex items-center gap-6">
-        <li><a href="/services" class="hover:underline">Services</a></li>
-        <li><a href="/service-areas" class="hover:underline">Service Areas</a></li>
-        <li><a href="/contact" class="hover:underline">Contact</a></li>
-      </ul>
+<header class="sticky top-0 z-50 border-b bg-white/80 backdrop-blur">
+  <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
+    <a href="/" class="text-lg font-semibold tracking-tight">{site.name}</a>
+    <nav class="hidden gap-6 md:flex">
+      <a href="/services" class="hover:text-gray-700">Services</a>
+      <a href="/service-areas" class="hover:text-gray-700">Service Areas</a>
+      <a href="/contact" class="hover:text-gray-700">Contact</a>
     </nav>
+    <a href="tel:16191234567" class="ml-4 hidden rounded-xl bg-black px-4 py-2 text-sm font-medium text-white md:inline-block">Call {site.phone}</a>
   </div>
 </header>
