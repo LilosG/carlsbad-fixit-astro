@@ -1,0 +1,25 @@
+---
+const { site } = Astro.props
+---
+<footer class="border-t bg-gray-50">
+  <div class="mx-auto max-w-7xl px-4 py-10 grid gap-6 md:grid-cols-3">
+    <div>
+      <div class="text-lg font-semibold">San Diego HandyMan Pros</div>
+      <div class="mt-2 text-sm">{site.address}</div>
+      <div class="mt-1 text-sm">{site.phone}</div>
+      <div class="mt-1 text-sm"><a href={"mailto:" + site.email} class="underline">{site.email}</a></div>
+    </div>
+    <div>
+      <div class="font-medium">Explore</div>
+      <ul class="mt-2 space-y-2 text-sm">
+        <li><a class="underline" href="/services">All Services</a></li>
+        <li><a class="underline" href="/service-areas">Service Areas</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="font-medium">Hours</div>
+      <div class="mt-2 text-sm">Mon–Sat 8:00–6:00</div>
+    </div>
+  </div>
+  <div class="text-center text-xs text-gray-500 py-4">© {new Date().getFullYear()} {site.name}</div>
+</footer>

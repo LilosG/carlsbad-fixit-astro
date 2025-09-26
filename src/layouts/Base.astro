@@ -1,12 +1,31 @@
 ---
-import "@/index.css";
-const { title = "Site", children } = Astro.props;
+import "../styles/tailwind.css"
+import Header from "../components/Header.astro"
+import Footer from "../components/Footer.astro"
+import SeoHead from "../components/SeoHead.astro"
+import JsonLd from "../components/JsonLd.astro"
+
+const { page = {} } = Astro.props
+const site = {
+  name: "San Diego HandyMan Pros",
+  phone: "619-123-4567",
+  email: "hello@sandiegohandymanpros.co",
+  address: "401 W A St Ste 200, San Diego, CA 92101"
+}
+const title = page.title ?? site.name
+const description = page.description ?? "Trusted local handyman services in San Diego County."
+const canonical = page.canonical ?? (Astro.url ? Astro.url.href : "/")
 ---
+<!doctype html>
 <html lang="en">
-  <head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><title>{title}</title></head>
-  <body class="min-h-screen bg-white text-black antialiased">
-    <header class="border-b"><nav class="mx-auto flex max-w-6xl items-center justify-between p-4"><a href="/" class="font-semibold">Site</a><div class="flex items-center gap-4"><a href="/services">Services</a></div></nav></header>
-    <main class="mx-auto max-w-6xl p-4">{children}</main>
-    <footer class="border-t"><div class="mx-auto max-w-6xl p-4 text-sm opacity-70">© {new Date().getFullYear()}</div></footer>
+  <head>
+    <SeoHead title={title} description={description} canonical={canonical} />
+  </head>
+  <body class="min-h-screen flex flex-col antialiased">
+    <Header />
+    <main class="flex-1">
+      <slot />
+    </main>
+    <Footer site={site} />
   </body>
 </html>

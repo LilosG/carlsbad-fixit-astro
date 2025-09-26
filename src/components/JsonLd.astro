@@ -1,0 +1,5 @@
+---
+interface Props { data: Record<string, any> }
+const { data } = Astro.props as Props
+---
+<script type="application/ld+json" is:inline>{JSON.stringify(data)}</script>
