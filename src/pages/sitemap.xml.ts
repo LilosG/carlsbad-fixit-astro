@@ -8,6 +8,7 @@ export const GET: APIRoute = async ({ site }) => {
     "/",
     "/services",
     "/service-areas",
+    "/contact",
     ...services.map(s => `/service/${s.slug}`),
     ...cities.map(c => `/service-area/${c.slug}`),
     ...cities.flatMap(c => services.map(s => `/${c.slug}/${s.slug}`))
