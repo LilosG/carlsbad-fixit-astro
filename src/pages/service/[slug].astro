@@ -2,27 +2,36 @@
 import Base from "../../layouts/Base.astro"
 import JsonLd from "../../components/JsonLd.astro"
 import { services } from "../../data/services"
+import { cities } from "../../data/cities"
+
 export async function getStaticPaths() {
   return services.map(s => ({ params: { slug: s.slug }, props: { service: s } }))
 }
+
 const { service } = Astro.props
 const page = {
   title: `${service.name} | San Diego HandyMan Pros`,
   description: `${service.name} for homes and businesses in San Diego County. Fast, reliable, and local.`,
   canonical: Astro.url ? Astro.url.href : undefined
 }
+
 const crumbs = [
   { name: "Home", url: "/" },
   { name: "Services", url: "/services" },
   { name: service.name, url: Astro.url ? Astro.url.pathname : `/service/${service.slug}` }
 ]
+
 const breadcrumbLd = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": crumbs.map((c, i) => ({
-    "@type": "ListItem", position: i + 1, name: c.name, item: new URL(c.url, Astro.site || "https://example.com").href
+    "@type": "ListItem",
+    position: i + 1,
+    name: c.name,
+    item: new URL(c.url, Astro.site || "https://sandiegohandymanpro.co").href
   }))
 }
+
 const serviceLd = {
   "@context": "https://schema.org",
   "@type": "Service",
@@ -36,8 +45,20 @@ const serviceLd = {
     <nav class="text-sm text-gray-600"><a href="/">Home</a> / <a href="/services">Services</a> / <span class="font-medium">{service.name}</span></nav>
     <h1 class="mt-4 text-3xl font-semibold">{service.name}</h1>
     <p class="mt-4 max-w-2xl text-gray-700">Professional {service.name.toLowerCase()} in San Diego County. Request a free estimate today.</p>
+
     <div class="mt-8">
       <a href="/contact" class="inline-block rounded-xl px-5 py-3 bg-black text-white">Get a quote</a>
+    </div>
+
+    <div class="mt-12">
+      <h2 class="text-2xl font-semibold">Now serving these cities</h2>
+      <ul class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {cities.map(c => (
+          <li class="border rounded-xl p-5 hover:shadow-sm">
+            <a class="underline" href={`/${c.slug}/${service.slug}`}>{service.name} in {c.name}</a>
+          </li>
+        ))}
+      </ul>
     </div>
   </section>
   <JsonLd data={breadcrumbLd} />
