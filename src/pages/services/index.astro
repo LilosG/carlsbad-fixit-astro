@@ -1,14 +1,33 @@
 ---
 import Base from "../../layouts/Base.astro"
+import JsonLd from "../../components/JsonLd.astro"
 import { services } from "../../data/services"
+
 const page = {
   title: "Services | San Diego HandyMan Pros",
-  description: "Browse our handyman services available across San Diego County."
+  description: "Browse trusted handyman services available across San Diego County."
+}
+
+const crumbs = [
+  { name: "Home", url: "/" },
+  { name: "Services", url: "/services" }
+]
+
+const breadcrumbLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": crumbs.map((c, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    name: c.name,
+    item: new URL(c.url, Astro.site || "https://sandiegohandymanpro.co").href
+  }))
 }
 ---
 <Base {page}>
   <section class="mx-auto max-w-7xl px-4 py-12">
-    <h1 class="text-3xl font-semibold">Services</h1>
+    <nav class="text-sm text-gray-600"><a href="/">Home</a> / <span class="font-medium">Services</span></nav>
+    <h1 class="mt-4 text-3xl font-semibold">Services</h1>
     {services.length === 0 ? (
       <p class="mt-6 text-gray-600">Services coming soon.</p>
     ) : (
@@ -21,4 +40,5 @@ const page = {
       </ul>
     )}
   </section>
+  <JsonLd data={breadcrumbLd} />
 </Base>
