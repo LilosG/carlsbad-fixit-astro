@@ -1,0 +1,24 @@
+---
+import Base from "../../layouts/Base.astro"
+import { services } from "../../data/services"
+const page = {
+  title: "Services | San Diego HandyMan Pros",
+  description: "Browse our handyman services available across San Diego County."
+}
+---
+<Base {page}>
+  <section class="mx-auto max-w-7xl px-4 py-12">
+    <h1 class="text-3xl font-semibold">Services</h1>
+    {services.length === 0 ? (
+      <p class="mt-6 text-gray-600">Services coming soon.</p>
+    ) : (
+      <ul class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {services.map(s => (
+          <li class="border rounded-xl p-5 hover:shadow-sm">
+            <a href={`/service/${s.slug}`} class="underline">{s.name}</a>
+          </li>
+        ))}
+      </ul>
+    )}
+  </section>
+</Base>
