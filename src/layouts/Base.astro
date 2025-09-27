@@ -21,9 +21,9 @@ const canonical = page.canonical ?? (Astro.url ? Astro.url.href : "/")
     <SeoHead title={title} description={description} canonical={canonical} />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
-  <body class="min-h-screen bg-white text-gray-900 antialiased">
+  <body class="min-h-screen bg-white text-gray-900 antialiased selection:bg-black selection:text-white">
     <Header site={site} />
-    <main class="min-h-[60vh]">
+    <main>
       <slot />
     </main>
     <Footer site={site} />
