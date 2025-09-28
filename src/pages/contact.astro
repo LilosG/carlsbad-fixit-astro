@@ -1,52 +1,17 @@
 ---
-import Base from "../layouts/Base.astro"
+import SeoHead from "../components/SeoHead.astro"
 import JsonLd from "../components/JsonLd.astro"
-const page = {
-  title: "Contact | San Diego HandyMan Pros",
-  description: "Request a quote or schedule service in San Diego County."
-}
-const contactLd = {
-  "@context": "https://schema.org",
-  "@type": "ContactPage",
-  "name": "Contact San Diego HandyMan Pros",
-  "url": "https://sandiegohandymanpro.co/contact",
-  "about": "Handyman services in San Diego County",
-  "mainEntity": {
-    "@type": "LocalBusiness",
-    "name": "San Diego HandyMan Pros",
-    "telephone": "619-123-4567",
-    "email": "hello@sandiegohandymanpros.co",
-    "address": {
-      "@type":"PostalAddress",
-      "streetAddress":"401 W A St Ste 200",
-      "addressLocality":"San Diego",
-      "addressRegion":"CA",
-      "postalCode":"92101"
-    }
-  }
-}
+import Base from "../layouts/Base.astro"
+const canonical = new URL(Astro.url.pathname, Astro.site ?? "https://sandiegohandymanpro.co").toString()
+const __TITLE = "Contact | San Diego Handyman Pros"
+const __DESC = "Get a fast, fair quote for handyman services in San Diego County."
+const __JSONLD = { "@context":"https://schema.org", "@type":"WebPage", "name": __TITLE, "url": canonical }
 ---
-<Base {page}>
-  <section class="mx-auto max-w-7xl px-4 py-12">
-    <nav class="text-sm text-gray-600"><a href="/">Home</a> / <span class="font-medium">Contact</span></nav>
-    <h1 class="mt-4 text-3xl font-semibold">Contact</h1>
-    <div class="mt-6 grid gap-8 md:grid-cols-2">
-      <div class="space-y-3 text-gray-700">
-        <p>Call 619-123-4567 or email hello@sandiegohandymanpros.co. Mon–Sat 8:00–6:00.</p>
-        <div><span class="font-medium">Address:</span> 401 W A St Ste 200, San Diego, CA 92101</div>
-        <div class="flex gap-3">
-          <a href="tel:16191234567" class="rounded-xl px-5 py-3 bg-black text-white">Call now</a>
-          <a href="mailto:hello@sandiegohandymanpros.co?subject=Service%20Request" class="rounded-xl px-5 py-3 border">Email us</a>
-        </div>
-      </div>
-      <form class="space-y-4" name="contact" method="post">
-        <input class="w-full border rounded-xl p-3" type="text" name="name" placeholder="Your name" required />
-        <input class="w-full border rounded-xl p-3" type="tel" name="phone" placeholder="Phone" />
-        <input class="w-full border rounded-xl p-3" type="email" name="email" placeholder="Email" required />
-        <textarea class="w-full border rounded-xl p-3" name="message" rows="5" placeholder="What do you need help with?" required></textarea>
-        <button class="rounded-xl px-5 py-3 bg-black text-white" type="submit">Request a quote</button>
-      </form>
-    </div>
+<SeoHead title={__TITLE} description={__DESC} canonical={canonical} />
+<JsonLd data={__JSONLD} />
+<Base>
+  <section class="mx-auto max-w-3xl px-4 py-12">
+    <h1 class="text-3xl font-semibold">Contact</h1>
+    <p class="mt-4 text-gray-700">Tell us about your project and we’ll get back quickly.</p>
   </section>
-  <JsonLd data={contactLd} />
 </Base>

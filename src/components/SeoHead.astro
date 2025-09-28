@@ -1,15 +1,26 @@
 ---
-const { title, description, canonical, ogImage } = Astro.props
-const url = canonical ?? (Astro.url ? Astro.url.href : "/")
+export interface Props {
+  title?: string
+  description?: string
+  canonical?: string
+  ogImage?: string
+  twitter?: { card?: string }
+}
+const p = Astro.props as Props
+const url = p.canonical ?? new URL(Astro.url.pathname, Astro.site ?? 'https://sandiegohandymanpro.co').toString()
+const title = p.title ?? 'San Diego Handyman Pros'
+const desc = p.description ?? 'Local handyman services in San Diego and North County.'
+const card = p.twitter?.card ?? 'summary_large_image'
 ---
 <title>{title}</title>
-<meta name="description" content={description} />
+<meta name="description" content={desc} />
 <link rel="canonical" href={url} />
-<meta property="og:title" content={title} />
-<meta property="og:description" content={description} />
 <meta property="og:type" content="website" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={desc} />
 <meta property="og:url" content={url} />
-{ogImage && <meta property="og:image" content={ogImage} />}
-<meta name="twitter:card" content="summary_large_image" />
+{p.ogImage && <meta property="og:image" content={p.ogImage} />}
+<meta name="twitter:card" content={card} />
 <meta name="twitter:title" content={title} />
-<meta name="twitter:description" content={description} />
+<meta name="twitter:description" content={desc} />
+{p.ogImage && <meta name="twitter:image" content={p.ogImage} />}
