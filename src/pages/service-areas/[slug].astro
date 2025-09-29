@@ -1,37 +1,63 @@
 ---
 import Base from "../../layouts/Base.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
 
-const slug = Astro.params.slug!;
-const cityName = slug.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
-const title = `Handyman in ${cityName} | Same-Week Help`;
-const description = `Drywall repair and furniture assembly in ${cityName}. Licensed & insured, upfront pricing. Call 619-123-4567.`;
-const services = [
-  { href: `/services/drywall-repair/${slug}`, label: "Drywall Repair" },
-  { href: `/services/furniture-assembly/${slug}`, label: "Furniture Assembly" },
+export const getStaticPaths = () => {
+  const cities = ["Carlsbad","Chula Vista","Del Mar","Encinitas","Escondido","La Jolla","La Mesa","Oceanside","Poway","San Diego","San Marcos"];
+  return cities.map(c => ({ params: { slug: c.toLowerCase().replaceAll(" ","-") } }));
+};
+
+const citySlug = (Astro.params.slug || "").toLowerCase();
+const city = citySlug.split("-").map(s => s.charAt(0).toUpperCase()+s.slice(1)).join(" ");
+
+const title = `Handyman in ${city}`;
+const description = `Same-week handyman service in ${city}: drywall repair and furniture assembly with upfront pricing.`;
+const canonical = `https://sandiegohandymanpros.co/service-areas/${citySlug}`;
+
+const links = [
+  { label: `Drywall Repair in ${city}`, href: `/services/drywall-repair/${citySlug}` },
+  { label: `Furniture Assembly in ${city}`, href: `/services/furniture-assembly/${citySlug}` }
 ];
-const schema = [{
+
+const faqs = [
+  { q: `Do you work in my ${city} neighborhood?`, a: `Yes, we cover most neighborhoods in ${city} with the same-week schedule.` },
+  { q: "How do quotes work?", a: "Send a few photos; we confirm scope, price, and earliest availability." },
+  { q: "Can you haul debris?", a: "Light debris from our work is included; larger loads can be added to the quote." }
+];
+
+const schema = {
   "@context": "https://schema.org",
-  "@type": "Service",
-  "serviceType": "Handyman",
-  "areaServed": cityName,
-  "provider": { "@type": "LocalBusiness", "name": "San Diego Handyman Pros", "telephone": "619-123-4567" }
-}];
+  "@type": "FAQPage",
+  mainEntity: faqs.map(i => ({
+    "@type": "Question",
+    name: i.q,
+    acceptedAnswer: { "@type": "Answer", text: i.a }
+  }))
+};
 ---
-<Base {title} {description} schema={schema}>
+<Base {title} {description} {canonical} schema={schema}>
+  <Breadcrumbs items={[
+    { href: "/", label: "Home" },
+    { href: "/service-areas", label: "Service Areas" },
+    { href: `/service-areas/`, label: city }
+  ]} />
   <section class="container py-10">
     <h1 class="h1">{title}</h1>
-    <p class="lead mt-3">Reliable local help in {cityName}: drywall patching, texture and paint-ready fixes, and expert furniture assembly—scheduled this week.</p>
+    <p class="lead mt-3 max-w-prose">Local, reliable, and tidy. We keep appointments and leave your space better than we found it.</p>
 
-    <h2 class="h2 mt-8 mb-4">Popular in {cityName}</h2>
-    <ul class="grid gap-3 sm:grid-cols-2">
-      {services.map(s => (
-        <li><a class="card block hover:shadow" href={s.href}><div class="h3">{s.label}</div><p class="text-ink-600 mt-1">Click to see details & pricing notes.</p></a></li>
-      ))}
+    <h2 class="h2 mt-10">Popular in {city}</h2>
+    <ul class="mt-4 grid gap-3 sm:grid-cols-2">
+      {links.map(l => <li><a class="card hover:border-ink-300" href={l.href}>{l.label}</a></li>)}
     </ul>
 
-    <div class="mt-8 flex gap-3">
-      <a href="/contact" class="btn btn-primary">Get a Quote</a>
-      <a href="tel:+16191234567" class="btn">Call 619-123-4567</a>
+    <h2 class="h2 mt-10">FAQs</h2>
+    <div class="mt-4 grid gap-3">
+      {faqs.map(i => (
+        <details class="card">
+          <summary class="font-medium">{i.q}</summary>
+          <div class="mt-2 text-ink-700">{i.a}</div>
+        </details>
+      ))}
     </div>
   </section>
 </Base>

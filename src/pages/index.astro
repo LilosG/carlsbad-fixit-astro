@@ -1,48 +1,11 @@
 ---
 import Base from "../layouts/Base.astro";
+import HomeLovable from "../components/HomeLovable.astro";
 
-const title = "Handyman in San Diego | Same-Week Help";
-const description = "Drywall repair & furniture assembly in San Diego. Same-week scheduling, licensed & insured, upfront pricing. Call 619-123-4567.";
-const schema = [{
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "name": "San Diego Handyman Pros",
-  "telephone": "619-123-4567",
-  "address": { "@type": "PostalAddress", "streetAddress": "401 W A St Ste 200", "addressLocality": "San Diego", "addressRegion": "CA", "postalCode": "92101" },
-  "areaServed": ["Carlsbad","Chula Vista","Del Mar","Encinitas","Escondido","La Jolla","La Mesa","Oceanside","Poway","San Diego","San Marcos"],
-  "url": "https://sandiegohandymanpro.co"
-}];
+const title = "Carlsbad Handyman Services — Electrical, Carpentry & Home Repairs";
+const description = "Fast, friendly, tidy. Same-week scheduling, licensed & insured, upfront pricing. Call 619-123-4567.";
+const canonical = "https://sandiegohandymanpros.co/";
 ---
-<Base {title} {description} schema={schema}>
-  <section class="container py-12">
-    <h1 class="h1">San Diego Handyman Pros</h1>
-    <p class="lead mt-3">Drywall repair and furniture assembly done right — same-week scheduling, licensed & insured, upfront pricing.</p>
-    <div class="mt-6 flex gap-3">
-      <a href="/contact" class="btn btn-primary">Get a Quote</a>
-      <a href="tel:+16191234567" class="btn">Call 619-123-4567</a>
-    </div>
-  </section>
-
-  <section class="container py-10">
-    <h2 class="h2 mb-4">Popular Services</h2>
-    <div class="grid gap-4 sm:grid-cols-2">
-      <a href="/services/drywall-repair" class="card">
-        <h3 class="h3 mb-2">Drywall Repair</h3>
-        <p class="text-ink-600">Patches, holes, cracks, water damage, texture match, and paint-ready finish.</p>
-      </a>
-      <a href="/services/furniture-assembly" class="card">
-        <h3 class="h3 mb-2">Furniture Assembly</h3>
-        <p class="text-ink-600">IKEA, Wayfair, office desks, beds, outdoor sets—assembled level and secure.</p>
-      </a>
-    </div>
-  </section>
-
-  <section class="container py-10">
-    <h2 class="h2 mb-4">Service Areas</h2>
-    <ul class="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
-      {["Carlsbad","Chula Vista","Del Mar","Encinitas","Escondido","La Jolla","La Mesa","Oceanside","Poway","San Diego","San Marcos"].map(c => (
-        <li><a class="text-ink-700 hover:underline" href={`/service-areas/${c.toLowerCase().replace(/\\s+/g,"-")}`}>{c}</a></li>
-      ))}
-    </ul>
-  </section>
+<Base {title} {description} {canonical}>
+  <HomeLovable />
 </Base>

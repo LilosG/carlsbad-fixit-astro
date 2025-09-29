@@ -1,7 +1,6 @@
 ---
 import "../styles/tailwind.css";
 import Nav from "../components/Nav.astro";
-import SEO from "../components/SEO.astro";
 
 export interface Props {
   title?: string;
@@ -15,7 +14,14 @@ const { title = "San Diego Handyman Pros", description, canonical, schema } = As
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <SEO title={title} description={description} canonical={canonical} />
+    <title>{title ?? "San Diego Handyman Pros"}</title>
+    {description && <meta name="description" content={description} />}
+    {Astro.site && <link rel="canonical" href={(canonical ?? new URL(Astro.url.pathname, new URL(String(Astro.site))).toString())} />}
+    <meta property="og:title" content={title ?? "San Diego Handyman Pros"} />
+    {description && <meta property="og:description" content={description} />}
+    {Astro.site && <meta property="og:url" content={(canonical ?? new URL(Astro.url.pathname, new URL(String(Astro.site))).toString())} />}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
   <body class="bg-white text-ink-800 antialiased">
     <header><Nav /></header>
@@ -55,6 +61,6 @@ const { title = "San Diego Handyman Pros", description, canonical, schema } = As
       </div>
       <div class="text-center text-xs text-ink-500 py-4 border-t border-slate-200">© {new Date().getFullYear()} San Diego Handyman Pros</div>
     </footer>
-    {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)}></script>}
+    {schema && <script is:inline  type="application/ld+json"  set:html={JSON.stringify(schema)}></script>}
   </body>
 </html>
