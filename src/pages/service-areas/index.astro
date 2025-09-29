@@ -28,6 +28,7 @@ const breadcrumbLd = {
     item: new URL(c.url, Astro.site || "https://sandiegohandymanpro.co").href
   }))
 }
+layout: ../../layouts/Base.astro
 ---
 <SeoHead title={__TITLE} description={__DESC} canonical={canonical} />
 <JsonLd data={__JSONLD} />

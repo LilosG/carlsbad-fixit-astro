@@ -1,51 +1,14 @@
 ---
-import SeoHead from "../../components/SeoHead.astro"
-import JsonLd from "../../components/JsonLd.astro"
-const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://sandiegohandymanpro.co').toString()
-let __TITLE = `Handyman Services in San Diego`
-let __DESC = `Browse our most requested handyman services across San Diego County.`
-const __JSONLD = { "@context":"https://schema.org", "@type":"WebPage", "name": __TITLE, "url": canonical }
-import Base from "../../layouts/Base.astro"
-import { services } from "../../data/services"
-
-const page = {
-  title: "Services | San Diego HandyMan Pros",
-  description: "Browse trusted handyman services available across San Diego County."
-}
-
-const crumbs = [
-  { name: "Home", url: "/" },
-  { name: "Services", url: "/services" }
-]
-
-const breadcrumbLd = {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": crumbs.map((c, i) => ({
-    "@type": "ListItem",
-    position: i + 1,
-    name: c.name,
-    item: new URL(c.url, Astro.site || "https://sandiegohandymanpro.co").href
-  }))
-}
+import Base from "../../layouts/Base.astro";
+const title = "Handyman Services | San Diego Handyman Pros";
+const description = "Drywall repair and furniture assembly with same-week scheduling and upfront pricing.";
 ---
-<SeoHead title={__TITLE} description={__DESC} canonical={canonical} />
-<JsonLd data={__JSONLD} />
-<Base {page}>
-  <section class="mx-auto max-w-7xl px-4 py-12">
-    <nav class="text-sm text-gray-600"><a href="/">Home</a> / <span class="font-medium">Services</span></nav>
-    <h1 class="mt-4 text-3xl font-semibold">Services</h1>
-    {services.length === 0 ? (
-      <p class="mt-6 text-gray-600">Services coming soon.</p>
-    ) : (
-      <ul class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {services.map(s => (
-          <li class="border rounded-xl p-5 hover:shadow-sm">
-            <a href={`/service/${s.slug}`} class="underline">{s.name}</a>
-          </li>
-        ))}
-      </ul>
-    )}
+<Base {title} {description}>
+  <section class="container py-10">
+    <h1 class="h1">Handyman Services</h1>
+    <ul class="grid gap-4 sm:grid-cols-2 mt-6">
+      <li><a class="card block hover:shadow" href="/services/drywall-repair"><div class="h3">Drywall Repair</div><p class="text-ink-600 mt-1">Holes, cracks, water damage, texture match, paint prep.</p></a></li>
+      <li><a class="card block hover:shadow" href="/services/furniture-assembly"><div class="h3">Furniture Assembly</div><p class="text-ink-600 mt-1">Beds, desks, dressers, outdoor sets, shelving—done right.</p></a></li>
+    </ul>
   </section>
-  <JsonLd data={breadcrumbLd} />
 </Base>

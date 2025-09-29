@@ -1,12 +1,60 @@
 ---
-import Layout from './Layout.astro'
-import SiteHeader from '../components/SiteHeader.astro'
-import SiteFooter from '../components/SiteFooter.astro'
+import "../styles/tailwind.css";
+import Nav from "../components/Nav.astro";
+import SEO from "../components/SEO.astro";
+
+export interface Props {
+  title?: string;
+  description?: string;
+  canonical?: string;
+  schema?: Record<string, any> | Record<string, any>[];
+}
+const { title = "San Diego Handyman Pros", description, canonical, schema } = Astro.props;
 ---
-<Layout>
-  <SiteHeader />
-  <main class="min-h-screen">
-    <slot />
-  </main>
-  <SiteFooter />
-</Layout>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <SEO title={title} description={description} canonical={canonical} />
+  </head>
+  <body class="bg-white text-ink-800 antialiased">
+    <header><Nav /></header>
+    <main class="min-h-[60vh]">
+      <slot />
+    </main>
+    <footer class="mt-16 border-t border-slate-200">
+      <div class="container grid gap-8 py-10 sm:grid-cols-2 lg:grid-cols-4">
+        <div>
+          <p class="text-lg font-bold">San Diego Handyman Pros</p>
+          <p class="text-sm text-ink-700 mt-2">Drywall repair and furniture assembly with same-week scheduling.</p>
+          <p class="text-sm mt-2"><a class="hover:underline" href="tel:+16191234567">619-123-4567</a></p>
+          <p class="text-sm mt-1">401 W A St Ste 200, San Diego, CA 92101</p>
+          <p class="text-sm mt-1">Mon–Sat 7am–7pm; Sun by appt.</p>
+        </div>
+        <div>
+          <p class="font-semibold">Quick Links</p>
+          <ul class="mt-2 text-sm text-ink-700 space-y-1">
+            <li><a class="hover:underline" href="/services">Services</a></li>
+            <li><a class="hover:underline" href="/service-areas">Service Areas</a></li>
+            <li><a class="hover:underline" href="/contact">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="font-semibold">Why Choose Us</p>
+          <ul class="mt-2 text-sm text-ink-700 space-y-1">
+            <li>Same-week scheduling</li>
+            <li>Licensed & insured</li>
+            <li>Upfront pricing</li>
+          </ul>
+        </div>
+        <div>
+          <p class="font-semibold">Get Help</p>
+          <p class="text-sm text-ink-700 mt-2">Tell us your punch-list. We’ll confirm clear, upfront pricing.</p>
+          <a href="tel:+16191234567" class="btn btn-primary mt-3">Call 619-123-4567</a>
+        </div>
+      </div>
+      <div class="text-center text-xs text-ink-500 py-4 border-t border-slate-200">© {new Date().getFullYear()} San Diego Handyman Pros</div>
+    </footer>
+    {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)}></script>}
+  </body>
+</html>

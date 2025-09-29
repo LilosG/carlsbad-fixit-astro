@@ -6,6 +6,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? "https://sandiegohan
 const __TITLE = "Contact | San Diego Handyman Pros"
 const __DESC = "Get a fast, fair quote for handyman services in San Diego County."
 const __JSONLD = { "@context":"https://schema.org", "@type":"WebPage", "name": __TITLE, "url": canonical }
+layout: ../layouts/Base.astro
 ---
 <SeoHead title={__TITLE} description={__DESC} canonical={canonical} />
 <JsonLd data={__JSONLD} />
