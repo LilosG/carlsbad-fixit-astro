@@ -1,0 +1,19 @@
+---
+const nav = [
+  { href: "/services", label: "Services" },
+  { href: "/service-areas", label: "Service Areas" },
+  { href: "/contact", label: "Contact" }
+];
+const phone = "619-123-4567";
+---
+<nav aria-label="Primary" class="bg-white/80 backdrop-blur sticky top-0 z-50 border-b border-slate-200">
+  <div class="container flex items-center justify-between py-3">
+    <a href="/" class="flex items-center gap-2" aria-label="San Diego Handyman Pros">
+      <span class="text-lg font-bold font-display text-ink-900">San Diego Handyman Pros</span>
+    </a>
+    <ul class="hidden md:flex items-center gap-6">
+      {nav.map(i => <li><a class="text-sm text-ink-700 hover:text-ink-900" href={i.href}>{i.label}</a></li>)}
+    </ul>
+    <a href="tel:+16191234567" class="btn btn-primary text-sm">Call {phone}</a>
+  </div>
+</nav>

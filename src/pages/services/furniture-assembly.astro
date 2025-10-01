@@ -1,0 +1,36 @@
+---
+import BaseLovable from "../../layouts/BaseLovable.astro";
+import Base from "../../layouts/BaseApp.astro";
+import AreaGrid from "../../components/AreaGrid.astro";
+import CTA from "../../components/CTA.astro";
+
+const title = "Furniture Assembly | San Diego Handyman Pros";
+const description = "Beds, desks, dressers, outdoor sets, and more assembled level and secure. Same-week scheduling.";
+const canonical = "https://sandiegohandymanpros.co/services/furniture-assembly";
+const cities = ["Carlsbad","Chula Vista","Del Mar","Encinitas","Escondido","La Jolla","La Mesa","Oceanside","Poway","San Diego","San Marcos"];
+---
+import BaseLovable from "../../layouts/BaseLovable.astro";
+<BaseLovable {title} {description} {canonical}>
+  <section class="container py-10">
+    <h1 class="h1">Furniture Assembly</h1>
+    <p class="lead mt-3 max-w-prose">Flat-pack to complex sets, secured and leveled with tidy clean-up. Upfront pricing.</p>
+
+    <div class="mt-8 grid gap-6 md:grid-cols-3">
+      <div class="card md:col-span-2">
+        <h2 class="h3">What’s included</h2>
+        <ul class="mt-3 list-disc pl-5 text-ink-700 space-y-1">
+          <li>Unpack, inventory hardware, careful assembly</li>
+          <li>Leveling, anchoring/strapping when appropriate</li>
+          <li>Packaging consolidated for disposal</li>
+        </ul>
+      </div>
+      <aside class="card">
+        <h2 class="h3">Good to know</h2>
+        <p class="mt-2 text-ink-700">Send model links/photos for an accurate quote.</p>
+      </aside>
+    </div>
+  </section>
+
+  <AreaGrid {cities} />
+  <CTA />
+</BaseLovable>

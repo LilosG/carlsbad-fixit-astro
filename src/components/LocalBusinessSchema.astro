@@ -1,0 +1,30 @@
+---
+import { SITE } from "../lib/site";
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "HomeAndConstructionBusiness",
+  "name": SITE.name,
+  "url": SITE.domain,
+  "telephone": SITE.phone,
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "401 W A St Ste 200",
+    "addressLocality": "San Diego",
+    "addressRegion": "CA",
+    "postalCode": "92101",
+    "addressCountry": "US"
+  },
+  "areaServed": [
+    "Carlsbad","Chula Vista","Del Mar","Encinitas","Escondido","La Jolla","La Mesa","Oceanside","Poway","San Diego","San Marcos"
+  ],
+  "openingHoursSpecification": [
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"], "opens": "07:00", "closes": "19:00" }
+  ],
+  "image": [`${SITE.domain}/og-image.jpg`],
+  "priceRange": "$$",
+  "founder": "San Diego Handyman Pros",
+  "currenciesAccepted": "USD",
+  "paymentAccepted": "Cash, Credit Card"
+};
+---
+{schema && <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)}></script>}

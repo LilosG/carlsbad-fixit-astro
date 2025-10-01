@@ -1,17 +1,37 @@
 ---
-import SeoHead from "../components/SeoHead.astro"
-import JsonLd from "../components/JsonLd.astro"
-import Base from "../layouts/Base.astro"
-const canonical = new URL(Astro.url.pathname, Astro.site ?? "https://sandiegohandymanpro.co").toString()
-const __TITLE = "Contact | San Diego Handyman Pros"
-const __DESC = "Get a fast, fair quote for handyman services in San Diego County."
-const __JSONLD = { "@context":"https://schema.org", "@type":"WebPage", "name": __TITLE, "url": canonical }
+import BaseLovable from "../layouts/BaseLovable.astro";
+import Base from "../layouts/BaseApp.astro";
+const title = "Request a Quote";
+const description = "Send details and photos to get an upfront quote and earliest availability.";
+const canonical = "https://sandiegohandymanpros.co/contact";
 ---
-<SeoHead title={__TITLE} description={__DESC} canonical={canonical} />
-<JsonLd data={__JSONLD} />
-<Base>
-  <section class="mx-auto max-w-3xl px-4 py-12">
-    <h1 class="text-3xl font-semibold">Contact</h1>
-    <p class="mt-4 text-gray-700">Tell us about your project and we’ll get back quickly.</p>
+import BaseLovable from "../layouts/BaseLovable.astro";
+<BaseLovable {title} {description} {canonical}>
+  <section class="container py-10">
+    <h1 class="h1">Request a Quote</h1>
+    <p class="lead mt-3 max-w-prose">Tell us briefly what you need help with. Photos help us quote faster.</p>
+    <form action="https://formspree.io/f/your-id" method="POST" class="mt-8 grid max-w-xl gap-4">
+      <label class="block">
+        <span class="block text-sm font-medium text-ink-700">Name</span>
+        <input name="name" required class="mt-1 w-full rounded-2xl border border-ink-200 p-3" />
+      </label>
+      <label class="block">
+        <span class="block text-sm font-medium text-ink-700">Email</span>
+        <input type="email" name="email" required class="mt-1 w-full rounded-2xl border border-ink-200 p-3" />
+      </label>
+      <label class="block">
+        <span class="block text-sm font-medium text-ink-700">Phone</span>
+        <input name="phone" class="mt-1 w-full rounded-2xl border border-ink-200 p-3" />
+      </label>
+      <label class="block">
+        <span class="block text-sm font-medium text-ink-700">City</span>
+        <input name="city" class="mt-1 w-full rounded-2xl border border-ink-200 p-3" />
+      </label>
+      <label class="block">
+        <span class="block text-sm font-medium text-ink-700">Project details</span>
+        <textarea name="details" rows="5" class="mt-1 w-full rounded-2xl border border-ink-200 p-3"></textarea>
+      </label>
+      <button class="btn btn-primary">Send</button>
+    </form>
   </section>
-</Base>
+</BaseLovable>

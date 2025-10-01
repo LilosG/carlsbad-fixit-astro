@@ -1,0 +1,26 @@
+---
+import "../styles/tailwind.css";
+export interface Props { title?: string; description?: string; canonical?: string }
+const { title = "San Diego Handyman Pros", description, canonical } = Astro.props as Props;
+const siteUrl = Astro.site ? new URL(String(Astro.site)) : null;
+const canonicalUrl = canonical ? canonical : siteUrl ? new URL(Astro.url.pathname, siteUrl).toString() : undefined;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>{title}</title>
+    {description && <meta name="description" content={description} />}
+    {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/love/assets/index-NSCFPhBd.css" />
+    <script type="module" src="/love/assets/index-CuGtkmwQ.js" defer></script>
+    <style>
+      html,body{height:100%}
+      .fullpage-iframe{display:block;width:100%;height:100vh;border:0}
+    </style>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

@@ -1,0 +1,26 @@
+---
+interface Props {
+  eyebrow?: string;
+  headline?: string;
+  sub?: string;
+  ctaHref?: string;
+  ctaLabel?: string;
+}
+const {
+  eyebrow = "Licensed & insured",
+  headline = "Handyman in San Diego",
+  sub = "Drywall repair & furniture assembly. Same-week scheduling, upfront pricing.",
+  ctaHref = "/contact",
+  ctaLabel = "Get your free quote",
+} = Astro.props as Props;
+---
+<section class="bg-white">
+  <div class="container py-12">
+    <p class="text-sm uppercase tracking-wide text-ink-600">{eyebrow}</p>
+    <h1 class="h1 mt-2">{headline}</h1>
+    {sub && <p class="lead mt-3 max-w-prose">{sub}</p>}
+    <div class="mt-6">
+      <a href={ctaHref} class="btn btn-primary">{ctaLabel}</a>
+    </div>
+  </div>
+</section>

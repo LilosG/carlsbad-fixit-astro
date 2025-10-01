@@ -1,0 +1,31 @@
+---
+import BaseLovable from "../../layouts/BaseLovable.astro";
+import Base from "../../layouts/BaseApp.astro";
+import CTA from "../../components/CTA.astro";
+
+export function getStaticPaths() {
+  const cities = ["Carlsbad","Chula Vista","Del Mar","Encinitas","Escondido","La Jolla","La Mesa","Oceanside","Poway","San Diego","San Marcos"];
+  return cities.map(c => ({ params: { slug: c.toLowerCase().replaceAll(" ","-") } }));
+}
+
+const citySlug = (Astro.params.slug || "").toLowerCase();
+const city = citySlug.split("-").map(s => s.charAt(0).toUpperCase()+s.slice(1)).join(" ");
+
+const title = `Handyman in ${city}`;
+const description = `Same-week handyman service in ${city}: drywall repair and furniture assembly with upfront pricing.`;
+const canonical = `https://sandiegohandymanpros.co/service-areas/${citySlug}`;
+---
+import BaseLovable from "../../layouts/BaseLovable.astro";
+<BaseLovable {title} {description} {canonical}>
+  <section class="container py-10">
+    <h1 class="h1">{title}</h1>
+    <p class="lead mt-3 max-w-prose">Local, reliable, and tidy. We keep appointments and leave your space better than we found it.</p>
+
+    <div class="mt-8 grid gap-4 sm:grid-cols-2">
+      <a class="card hover:border-ink-300" href={`/services/drywall-repair/${citySlug}`}>Drywall Repair in {city}</a>
+      <a class="card hover:border-ink-300" href={`/services/furniture-assembly/${citySlug}`}>Furniture Assembly in {city}</a>
+    </div>
+  </section>
+
+  <CTA headline={`Need help in ${city}?`} />
+</BaseLovable>

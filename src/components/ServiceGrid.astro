@@ -1,0 +1,23 @@
+---
+interface Item { slug: string; title: string; blurb?: string }
+interface Props { items?: Item[] }
+const { items = [] } = Astro.props as Props;
+---
+<section class="bg-white">
+  <div class="container py-12">
+    <h2 class="h2">Popular Services</h2>
+    <ul class="mt-6 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+      {items.map((s) => (
+        <li>
+          <a href={`/services/${s.slug}`} class="card hover:border-ink-300 block">
+            <div class="font-medium">{s.title}</div>
+            {s.blurb && <p class="mt-1 text-ink-700 text-sm">{s.blurb}</p>}
+          </a>
+        </li>
+      ))}
+      {items.length === 0 && (
+        <li class="text-ink-600">No services to show.</li>
+      )}
+    </ul>
+  </div>
+</section>

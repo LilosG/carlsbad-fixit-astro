@@ -1,0 +1,86 @@
+---
+import BaseLovable from "../../../layouts/BaseLovable.astro";
+import Base from "../../../layouts/BaseApp.astro";
+import Breadcrumbs from "../../../components/Breadcrumbs.astro";
+
+export const getStaticPaths = () => {
+  const services = ["drywall-repair", "furniture-assembly"];
+  const cities = ["Carlsbad","Chula Vista","Del Mar","Encinitas","Escondido","La Jolla","La Mesa","Oceanside","Poway","San Diego","San Marcos"];
+  return services.flatMap(service =>
+    cities.map(city => ({
+      params: { service, city: city.toLowerCase().replaceAll(" ","-") }
+    }))
+  );
+};
+
+const serviceSlug = (Astro.params.service || "").toLowerCase();
+const citySlug = (Astro.params.city || "").toLowerCase();
+
+const serviceMap: Record<string,string> = {
+  "drywall-repair": "Drywall Repair",
+  "furniture-assembly": "Furniture Assembly"
+};
+const svc = serviceMap[serviceSlug] ?? "Handyman Service";
+const city = citySlug.split("-").map(s => s.charAt(0).toUpperCase()+s.slice(1)).join(" ");
+
+const title = `${svc} in ${city}`;
+const description = `${svc} with fast, tidy workmanship in ${city}. Licensed & insured. Upfront pricing.`;
+const canonical = `https://sandiegohandymanpros.co/services/${serviceSlug}/${citySlug}`;
+
+const faqs = [
+  { q: `How soon can you start ${svc.toLowerCase()} in ${city}?`, a: `Most jobs schedule the same week in ${city}.` },
+  { q: "Will the finish match?", a: "Yes—textures and paint are blended for near-invisible results when applicable." },
+  { q: "Do you work weekends?", a: "Saturday appointments available; Sunday by appointment." }
+];
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map(i => ({
+    "@type": "Question",
+    name: i.q,
+    acceptedAnswer: { "@type": "Answer", text: i.a }
+  }))
+};
+---
+import BaseLovable from "../../../layouts/BaseLovable.astro";
+<BaseLovable {title} {description} {canonical} schema={schema}>
+  <Breadcrumbs items={[
+    { href: "/", label: "Home" },
+    { href: "/services", label: "Services" },
+    { href: `/services/`, label: svc },
+    { href: `/services//`, label: city }
+  ]} />
+  <section class="container py-10">
+    <h1 class="h1">{title}</h1>
+    <p class="lead mt-3 max-w-prose">Meticulous prep, clear scope, and clean finishes across {city} homes and condos.</p>
+
+    <h2 class="h2 mt-10">What’s included</h2>
+    <ul class="mt-4 grid gap-3 md:grid-cols-2">
+      <li class="card">Upfront written quote</li>
+      <li class="card">Licensed & insured pros</li>
+      <li class="card">Jobsite protection + clean-up</li>
+      <li class="card">Photos on completion</li>
+    </ul>
+
+    <p class="mt-8 text-sm text-ink-600">
+      See more in <a class="underline" href={`/service-areas/${citySlug}`}>{city} service area</a>
+      or the parent <a class="underline" href={`/services/${serviceSlug}`}>{svc}</a>.
+    </p>
+
+    <h2 class="h2 mt-10">FAQs</h2>
+    <div class="mt-4 grid gap-3">
+      {faqs.map(i => (
+        <details class="card">
+          <summary class="font-medium">{i.q}</summary>
+          <div class="mt-2 text-ink-700">{i.a}</div>
+        </details>
+      ))}
+    </div>
+  </section>
+</BaseLovable>
+  <section class="bg-ink-50">
+    <div class="container py-12">
+      <a href="/contact" class="btn btn-primary">Request a quote</a>
+    </div>
+  </section>

@@ -1,5 +1,8 @@
 ---
+/* Props for simple <title> and <meta name="description"> defaults */
 const { title = "", description = "" } = Astro.props;
+
+/* Tailwind must be imported (from src) so Vite bundles it */
 import "../styles/tailwind.css";
 ---
 <html lang="en">
@@ -9,9 +12,14 @@ import "../styles/tailwind.css";
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="icon" href="/favicon.ico" />
+    <!-- Fonts (keep yours) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="/loveable.css" />    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Load Lovable CSS AFTER Tailwind so Lovable wins where they conflict -->
+    <link rel="stylesheet" href="/loveable.css" />
+    <!-- Optional: slot for page-specific SEO tags without touching CSS -->
+    <slot name="head" />
   </head>
   <body class="min-h-dvh antialiased text-gray-900">
     <slot />

@@ -1,22 +1,18 @@
 ---
-import Base from '../layouts/Base.astro'
-import SeoHead from '../components/SeoHead.astro'
-import JsonLd from '../components/JsonLd.astro'
-
-const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://sandiegohandymanpro.co').toString()
-const __TITLE = `San Diego Handyman Pros`
-const __DESC = `Local handyman services in San Diego and North County.`
-const __JSONLD = { "@context":"https://schema.org", "@type":"WebPage", "name": __TITLE, "url": canonical }
+import BaseLovable from "../layouts/BaseLovable.astro";
+const TITLE = "San Diego Commercial Mailbox";            // <- change if you want
+const DESC  = "USPS-approved mailbox sales, installs & service in San Diego County."; // <- edit
+const CANON = "https://sandiegocommercialmailbox.com/";  // <- your real domain
 ---
-<SeoHead title={__TITLE} description={__DESC} canonical={canonical} />
-<JsonLd data={__JSONLD} />
+<BaseLovable title={TITLE} description={DESC}>
+  <Fragment slot="head">
+    <link rel="canonical" href={CANON} />
+  </Fragment>
 
-<Base>
-  <section class="mx-auto max-w-7xl px-4 py-12">
-    <h1 class="text-4xl font-semibold">San Diego Handyman Pros</h1>
-    <p class="mt-4 max-w-2xl text-gray-700">Local handyman services in San Diego and North County.</p>
-    <div class="mt-8">
-      <a href="/contact" class="inline-block rounded-2xl px-5 py-3 bg-black text-white">Get a quote</a>
-    </div>
-  </section>
-</Base>
+  <!-- Keep the Lovable homepage, but now inside the unified layout -->
+  <iframe class="fullpage-iframe"
+          src="/love/index.html"
+          title="Homepage"
+          loading="eager"
+          style="display:block;width:100%;height:100vh;border:0;"></iframe>
+</BaseLovable>
