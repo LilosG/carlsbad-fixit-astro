@@ -1,8 +1,6 @@
 ---
 const { title = "", description = "" } = Astro.props;
 import "../styles/tailwind.css";
-import "../styles/components.css";
-import "../styles/loveable.css";
 ---
 <html lang="en">
   <head>
@@ -13,7 +11,7 @@ import "../styles/loveable.css";
     <link rel="icon" href="/favicon.ico" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/loveable.css" />    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
   </head>
   <body class="min-h-dvh antialiased text-gray-900">
     <slot />

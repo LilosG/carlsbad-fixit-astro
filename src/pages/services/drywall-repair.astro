@@ -1,4 +1,5 @@
 ---
+import BaseLovable from "../../layouts/BaseLovable.astro";
 import Base from "../../layouts/BaseApp.astro";
 import AreaGrid from "../../components/AreaGrid.astro";
 import CTA from "../../components/CTA.astro";
@@ -8,7 +9,8 @@ const description = "Drywall patching, crack repair, texture match, and paint-re
 const canonical = "https://sandiegohandymanpros.co/services/drywall-repair";
 const cities = ["Carlsbad","Chula Vista","Del Mar","Encinitas","Escondido","La Jolla","La Mesa","Oceanside","Poway","San Diego","San Marcos"];
 ---
-<Base {title} {description} {canonical}>
+import BaseLovable from "../../layouts/BaseLovable.astro";
+<BaseLovable {title} {description} {canonical}>
   <section class="container py-10">
     <h1 class="h1">Drywall Repair</h1>
     <p class="lead mt-3 max-w-prose">Patch holes, fix seams, match texture, and leave it paint-ready. Same-week scheduling.</p>
@@ -32,4 +34,4 @@ const cities = ["Carlsbad","Chula Vista","Del Mar","Encinitas","Escondido","La J
 
   <AreaGrid {cities} />
   <CTA />
-</Base>
+</BaseLovable>

@@ -1,10 +1,12 @@
 ---
+import BaseLovable from "../layouts/BaseLovable.astro";
 import Base from "../layouts/BaseApp.astro";
 const title = "Request a Quote";
 const description = "Send details and photos to get an upfront quote and earliest availability.";
 const canonical = "https://sandiegohandymanpros.co/contact";
 ---
-<Base {title} {description} {canonical}>
+import BaseLovable from "../layouts/BaseLovable.astro";
+<BaseLovable {title} {description} {canonical}>
   <section class="container py-10">
     <h1 class="h1">Request a Quote</h1>
     <p class="lead mt-3 max-w-prose">Tell us briefly what you need help with. Photos help us quote faster.</p>
@@ -32,4 +34,4 @@ const canonical = "https://sandiegohandymanpros.co/contact";
       <button class="btn btn-primary">Send</button>
     </form>
   </section>
-</Base>
+</BaseLovable>

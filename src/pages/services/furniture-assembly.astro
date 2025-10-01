@@ -1,4 +1,5 @@
 ---
+import BaseLovable from "../../layouts/BaseLovable.astro";
 import Base from "../../layouts/BaseApp.astro";
 import AreaGrid from "../../components/AreaGrid.astro";
 import CTA from "../../components/CTA.astro";
@@ -8,7 +9,8 @@ const description = "Beds, desks, dressers, outdoor sets, and more assembled lev
 const canonical = "https://sandiegohandymanpros.co/services/furniture-assembly";
 const cities = ["Carlsbad","Chula Vista","Del Mar","Encinitas","Escondido","La Jolla","La Mesa","Oceanside","Poway","San Diego","San Marcos"];
 ---
-<Base {title} {description} {canonical}>
+import BaseLovable from "../../layouts/BaseLovable.astro";
+<BaseLovable {title} {description} {canonical}>
   <section class="container py-10">
     <h1 class="h1">Furniture Assembly</h1>
     <p class="lead mt-3 max-w-prose">Flat-pack to complex sets, secured and leveled with tidy clean-up. Upfront pricing.</p>
@@ -31,4 +33,4 @@ const cities = ["Carlsbad","Chula Vista","Del Mar","Encinitas","Escondido","La J
 
   <AreaGrid {cities} />
   <CTA />
-</Base>
+</BaseLovable>

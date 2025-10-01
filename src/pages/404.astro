@@ -1,7 +1,9 @@
 ---
+import BaseLovable from "../layouts/BaseLovable.astro";
 import Base from "../layouts/BaseApp.astro"
 ---
-<Base>
+import BaseLovable from "../layouts/BaseLovable.astro";
+<BaseLovable>
   <section class="mx-auto max-w-7xl px-4 py-12">
     <h1 class="text-3xl font-semibold">404 — Page not found</h1>
     <p class="mt-4 max-w-2xl text-gray-700">Sorry, we couldn’t find that page.</p>
@@ -9,4 +11,4 @@ import Base from "../layouts/BaseApp.astro"
       <a href="/" class="inline-block rounded-2xl px-5 py-3 bg-black text-white">Back to home</a>
     </div>
   </section>
-</Base>
+</BaseLovable>
