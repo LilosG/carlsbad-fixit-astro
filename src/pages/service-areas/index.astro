@@ -1,19 +1,26 @@
 ---
 import Base from "../../layouts/Base.astro";
+import { getCollection, type CollectionEntry } from "astro:content";
 const title = "Service Areas";
 const description = "Local handyman service across San Diego County with same-week scheduling.";
-const canonical = "https://sandiegohandymanpros.co/service-areas";
-const cities = ["Carlsbad","Chula Vista","Del Mar","Encinitas","Escondido","La Jolla","La Mesa","Oceanside","Poway","San Diego","San Marcos"];
+const entries = await getCollection("areas");
+const areas = (entries as CollectionEntry<"areas">[])
+  .map((e) => ({ href: `/service-areas/${e.slug}`, label: e.data.title }))
+  .sort((a, b) => a.label.localeCompare(b.label));
 ---
-<Base {title} {description} {canonical}>
+<Base {title} {description}>
   <section class="container py-10">
     <h1 class="h1">Service Areas</h1>
-    <ul class="mt-6 grid gap-3 sm:grid-cols-2 md:grid-cols-3">
-      {cities.map((c) => (
-        <li>
-          <a href={`/service-areas/${c.toLowerCase().replaceAll(" ","-")}`} class="card hover:border-ink-300">{c}</a>
-        </li>
-      ))}
-    </ul>
+    <p class="lead mt-3 max-w-prose">We come to you across San Diego County. Pick your city to see services and availability.</p>
+  </section>
+  <section class="bg-white">
+    <div class="container py-12">
+      <h2 class="h2">Book in your city</h2>
+      <ul class="mt-6 grid gap-3 sm:grid-cols-2 md:grid-cols-3">
+        {areas.map((a) => (
+          <li><a href={a.href} class="card hover:border-ink-300">{a.label}</a></li>
+        ))}
+      </ul>
+    </div>
   </section>
 </Base>

@@ -1,0 +1,23 @@
+---
+interface Props {
+  headline?: string;
+  sub?: string;
+  ctaHref?: string;
+  ctaLabel?: string;
+}
+const {
+  headline = "Get your free quote",
+  sub = "Tell us about your project—same-week scheduling, upfront pricing.",
+  ctaHref = "/contact",
+  ctaLabel = "Request a quote",
+} = Astro.props as Props;
+---
+<section class="bg-ink-50">
+  <div class="container py-12">
+    <h2 class="h2">{headline}</h2>
+    {sub && <p class="lead mt-2 max-w-prose">{sub}</p>}
+    <div class="mt-6">
+      <a href={ctaHref} class="btn btn-primary">{ctaLabel}</a>
+    </div>
+  </div>
+</section>

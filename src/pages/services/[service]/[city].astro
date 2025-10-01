@@ -1,5 +1,5 @@
 ---
-import Base from "../../../layouts/Base.astro";
+import Base from "../../../layouts/BaseApp.astro";
 import Breadcrumbs from "../../../components/Breadcrumbs.astro";
 
 export const getStaticPaths = () => {
@@ -77,3 +77,8 @@ const schema = {
     </div>
   </section>
 </Base>
+  <section class="bg-ink-50">
+    <div class="container py-12">
+      <a href="/contact" class="btn btn-primary">Request a quote</a>
+    </div>
+  </section>

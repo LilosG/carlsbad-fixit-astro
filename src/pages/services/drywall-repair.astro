@@ -1,22 +1,35 @@
 ---
-import Base from "../../layouts/Base.astro";
+import Base from "../../layouts/BaseApp.astro";
+import AreaGrid from "../../components/AreaGrid.astro";
+import CTA from "../../components/CTA.astro";
+
 const title = "Drywall Repair | San Diego Handyman Pros";
 const description = "Drywall patching, crack repair, texture match, and paint-ready finish. Same-week scheduling.";
+const canonical = "https://sandiegohandymanpros.co/services/drywall-repair";
+const cities = ["Carlsbad","Chula Vista","Del Mar","Encinitas","Escondido","La Jolla","La Mesa","Oceanside","Poway","San Diego","San Marcos"];
 ---
-<Base {title} {description}>
+<Base {title} {description} {canonical}>
   <section class="container py-10">
     <h1 class="h1">Drywall Repair</h1>
-    <p class="lead mt-3">From nail pops to water damage, we repair and blend so it looks original—ready for paint.</p>
-    <h2 class="h2 mt-8 mb-3">What’s Included</h2>
-    <ul class="list-disc pl-6 text-ink-700">
-      <li>Patching holes, dents, cracks</li>
-      <li>Tape and mud, sand, and texture match</li>
-      <li>Blend to paint-ready finish</li>
-      <li>Clean workspace and disposal</li>
-    </ul>
-    <div class="mt-8 flex gap-3">
-      <a href="/contact" class="btn btn-primary">Get a Quote</a>
-      <a href="tel:+16191234567" class="btn">Call 619-123-4567</a>
+    <p class="lead mt-3 max-w-prose">Patch holes, fix seams, match texture, and leave it paint-ready. Same-week scheduling.</p>
+
+    <div class="mt-8 grid gap-6 md:grid-cols-3">
+      <div class="card md:col-span-2">
+        <h2 class="h3">What’s included</h2>
+        <ul class="mt-3 list-disc pl-5 text-ink-700 space-y-1">
+          <li>Clean cuts, backing where needed, proper patch & compound</li>
+          <li>Feathered sanding, texture blend, and prime</li>
+          <li>Optional paint to match (on request)</li>
+          <li>Floor & furniture protection; tidy cleanup</li>
+        </ul>
+      </div>
+      <aside class="card">
+        <h2 class="h3">Good to know</h2>
+        <p class="mt-2 text-ink-700">Send photos for an upfront quote. Licensed & insured.</p>
+      </aside>
     </div>
   </section>
+
+  <AreaGrid {cities} />
+  <CTA />
 </Base>

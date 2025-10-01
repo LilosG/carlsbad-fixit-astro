@@ -1,11 +1,10 @@
 ---
-import Base from "../layouts/Base.astro";
-import HomeLovable from "../components/HomeLovable.astro";
-
-const title = "Carlsbad Handyman Services — Electrical, Carpentry & Home Repairs";
-const description = "Fast, friendly, tidy. Same-week scheduling, licensed & insured, upfront pricing. Call 619-123-4567.";
-const canonical = "https://sandiegohandymanpros.co/";
+import Blank from "../layouts/Blank.astro";
 ---
-<Base {title} {description} {canonical}>
-  <HomeLovable />
-</Base>
+<Blank
+  title="San Diego Handyman Pros"
+  description="Drywall repair & furniture assembly. Same-week scheduling, upfront pricing."
+  canonical="https://sandiegohandymanpros.co/"
+>
+  <iframe class="fullpage-iframe" src="/love/index.html" title="Homepage" loading="eager"></iframe>
+</Blank>

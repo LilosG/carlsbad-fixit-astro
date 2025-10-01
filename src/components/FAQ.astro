@@ -1,0 +1,17 @@
+---
+interface QA { q: string; a: string }
+const { title = "Frequently Asked Questions", items = [] as QA[] } = Astro.props;
+---
+<section class="bg-white">
+  <div class="container py-12">
+    <h2 class="h2">{title}</h2>
+    <div class="mt-6 grid gap-4">
+      {items.map((qa) => (
+        <details class="card">
+          <summary class="font-medium cursor-pointer">{qa.q}</summary>
+          <div class="mt-2 text-ink-700">{qa.a}</div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

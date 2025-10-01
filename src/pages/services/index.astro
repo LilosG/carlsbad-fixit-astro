@@ -1,14 +1,48 @@
 ---
 import Base from "../../layouts/Base.astro";
-const title = "Handyman Services | San Diego Handyman Pros";
-const description = "Drywall repair and furniture assembly with same-week scheduling and upfront pricing.";
+
+const cards = [
+  { href: "/services/cluster-box-units", title: "Cluster Box Units (CBUs)" },
+  { href: "/services/4c-mailboxes", title: "4C Mailboxes" },
+  { href: "/services/pedestal-wall-mounted", title: "Pedestal & Wall-Mounted Mailboxes" },
+  { href: "/services/parcel-lockers", title: "Parcel Lockers" },
+  { href: "/services/repairs-lock-changes", title: "Repairs & Lock Changes" },
+  { href: "/services/maintenance", title: "Maintenance & Compliance" },
+];
 ---
-<Base {title} {description}>
-  <section class="container py-10">
-    <h1 class="h1">Handyman Services</h1>
-    <ul class="grid gap-4 sm:grid-cols-2 mt-6">
-      <li><a class="card block hover:shadow" href="/services/drywall-repair"><div class="h3">Drywall Repair</div><p class="text-ink-600 mt-1">Holes, cracks, water damage, texture match, paint prep.</p></a></li>
-      <li><a class="card block hover:shadow" href="/services/furniture-assembly"><div class="h3">Furniture Assembly</div><p class="text-ink-600 mt-1">Beds, desks, dressers, outdoor sets, shelving—done right.</p></a></li>
-    </ul>
+
+<Base
+  title="Services | San Diego Commercial Mailbox"
+  description="USPS-compliant mailbox installation, repairs, and maintenance across San Diego County."
+>
+  <section class="container py-12">
+    <h1 class="text-3xl md:text-4xl font-bold text-[hsl(var(--postal-navy))] mb-8 font-poppins">
+      Services
+    </h1>
+
+    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {cards.map((c) => (
+        <a href={c.href} class="card-service hover:-translate-y-1">
+          <h2 class="text-lg font-semibold text-[hsl(var(--postal-navy))] mb-2 font-poppins">
+            {c.title}
+          </h2>
+          <span class="inline-flex rounded-lg px-3 py-2 text-sm bg-[hsl(var(--postal-navy))] text-white">
+            View service
+          </span>
+        </a>
+      ))}
+
+      <a href="/service-areas" class="card-service hover:-translate-y-1">
+        <h2 class="text-lg font-semibold text-[hsl(var(--postal-navy))] mb-2 font-poppins">
+          See Service Areas
+        </h2>
+        <p class="text-[hsl(var(--postal-slate))] text-sm leading-relaxed font-inter mb-4">
+          Find coverage near you.
+        </p>
+        <span class="inline-flex rounded-lg px-3 py-2 text-sm bg-[hsl(var(--postal-navy))] text-white">
+          Browse areas
+        </span>
+      </a>
+    </div>
   </section>
 </Base>
