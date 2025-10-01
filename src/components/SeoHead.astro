@@ -12,15 +12,17 @@ const title = p.title ?? 'San Diego Handyman Pros'
 const desc = p.description ?? 'Local handyman services in San Diego and North County.'
 const card = p.twitter?.card ?? 'summary_large_image'
 ---
-<title>{title}</title>
-<meta name="description" content={desc} />
-<link rel="canonical" href={url} />
-<meta property="og:type" content="website" />
-<meta property="og:title" content={title} />
-<meta property="og:description" content={desc} />
-<meta property="og:url" content={url} />
-{p.ogImage && <meta property="og:image" content={p.ogImage} />}
-<meta name="twitter:card" content={card} />
-<meta name="twitter:title" content={title} />
-<meta name="twitter:description" content={desc} />
-{p.ogImage && <meta name="twitter:image" content={p.ogImage} />}
+<Fragment slot="head">
+  <title>{title}</title>
+  <meta name="description" content={desc} />
+  <link rel="canonical" href={url} />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={desc} />
+  <meta property="og:url" content={url} />
+  {p.ogImage && <meta property="og:image" content={p.ogImage} />}
+  <meta name="twitter:card" content={card} />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={desc} />
+  {p.ogImage && <meta name="twitter:image" content={p.ogImage} />}
+</Fragment>
