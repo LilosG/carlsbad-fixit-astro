@@ -1,18 +1,16 @@
 ---
-import BaseLovable from "../layouts/BaseLovable.astro";
-const TITLE = "San Diego Commercial Mailbox";            // <- change if you want
-const DESC  = "USPS-approved mailbox sales, installs & service in San Diego County."; // <- edit
-const CANON = "https://sandiegocommercialmailbox.com/";  // <- your real domain
----
-<BaseLovable title={TITLE} description={DESC}>
-  <Fragment slot="head">
-    <link rel="canonical" href={CANON} />
-  </Fragment>
+import Base from "../layouts/Base.astro";
 
-  <!-- Keep the Lovable homepage, but now inside the unified layout -->
-  <iframe class="fullpage-iframe"
-          src="/love/index.html"
-          title="Homepage"
-          loading="eager"
-          style="display:block;width:100%;height:100vh;border:0;"></iframe>
-</BaseLovable>
+const title = "San Diego Handyman Pros";
+const description = "Local handyman services in San Diego and North County. Same-week scheduling, upfront pricing.";
+const canonical = "https://sandiegohandymanpros.co/";
+---
+<Base {title} {description} {canonical}>
+  <iframe
+    class="fullpage-iframe"
+    src="/love/index.html"
+    title="Homepage"
+    loading="eager"
+    style="display:block;width:100%;height:100vh;border:0;"
+  />
+</Base>

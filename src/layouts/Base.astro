@@ -1,6 +1,6 @@
 ---
-const { title = "", description = "" } = Astro.props;
 import "../styles/tailwind.css";
+const { title = "", description = "", canonical = "" } = Astro.props;
 ---
 <html lang="en">
   <head>
@@ -9,9 +9,16 @@ import "../styles/tailwind.css";
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="icon" href="/favicon.ico" />
+
+    <!-- Fonts (keep yours) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="/loveable.css" />    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+    <!-- Lovable CSS AFTER Tailwind -->
+    <link rel="stylesheet" href="/loveable.css" />
+
+    {canonical && <link rel="canonical" href={canonical} />}
   </head>
   <body class="min-h-dvh antialiased text-gray-900">
     <slot />
